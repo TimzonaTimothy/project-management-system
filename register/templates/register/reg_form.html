@@ -1,0 +1,191 @@
+{% comment %} {% extends 'core/base.html' %} {% endcomment %}
+{% load static %}
+<!--
+ * CoreUI - Open Source Bootstrap Admin Template
+ * @version v1.0.10
+ * @link http://coreui.io
+ * Copyright (c) 2018 creativeLabs Łukasz Holeczek
+ * @license MIT
+-->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-147225311-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-147225311-2');
+    </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+  <meta name="author" content="Łukasz Holeczek">
+  <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,AngularJS,Angular,Angular2,Angular 2,Angular4,Angular 4,jQuery,CSS,HTML,RWD,Dashboard,React,React.js,Vue,Vue.js">
+  <meta name="google-site-verification" content="83fcqoPn-YTkXathQiicW-x3U2RWZh4PaPUzk91wtjY" />
+  <title>Project Manager</title>
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous">
+  <link href="{% static 'core/css/simple-line-icons.min.css' %}" rel="stylesheet">
+
+  <!-- Main styles for this application -->
+  <link href="{% static 'core/css/estilo.css' %}" rel="stylesheet">
+  <link href="{% static 'core/css/style.css' %}" rel="stylesheet">
+
+</head>
+
+{% comment %} {% block breadcrumb %}
+        <li class="breadcrumb-item">Home</li>
+        <li class="breadcrumb-item">Users</li>
+        <li class="breadcrumb-item active">Create New User</li>
+{% endblock breadcrumb%} {% endcomment %}
+
+{% block body %}
+
+<div class="container mt-4 animated fadeIn">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card-group">
+                    <div class="card p-4 mb-5">
+                        <div class="card-body">
+                            {% if created %}
+                              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                  </button>
+                                  Congratulations, a new user was created!
+                              </div>
+                            {% else %}
+                                {% csrf_token %}
+                                <h1>Users</h1>
+                                <p class="text-muted">Create users here</p>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="form-group mb-4">
+                            <div class="input-group">
+                                {{ form.username }}
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                </div>
+                                {% if form.username.errors %}
+                                    <ol>
+                                    {% for error in form.username.errors %}
+                                        <li><strong>{{ error|escape }}</strong></li>
+                                    {% endfor %}
+                                    </ol>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="form-group mb-4">
+                            <div class="input-group">
+                                {{ form.first_name }}
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                </div>
+                                {% if form.first_name.errors %}
+                                    <ol>
+                                    {% for error in form.first_name.errors %}
+                                        <li><strong>{{ error|escape }}</strong></li>
+                                    {% endfor %}
+                                    </ol>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                {{ form.last_name }}
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                </div>
+                                {% if form.last_name.errors %}
+                                    <ol>
+                                    {% for error in form.last_name.errors %}
+                                        <li><strong>{{ error|escape }}</strong></li>
+                                    {% endfor %}
+                                    </ol>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                {{ form.email }}
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                                </div>
+                                {% if form.email.errors %}
+                                    <ol>
+                                    {% for error in form.email.errors %}
+                                        <li><strong>{{ error|escape }}</strong></li>
+                                    {% endfor %}
+                                    </ol>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                {{ form.password1 }}
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fa fa-key"></i></span>
+                                </div>
+                                {% if form.password1.errors %}
+                                    <ol>
+                                    {% for error in form.password1.errors %}
+                                        <li><strong>{{ error|escape }}</strong></li>
+                                    {% endfor %}
+                                    </ol>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                {{ form.password2 }}
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fa fa-key"></i></span>
+                                </div>
+
+                            </div>
+                            {% if form.password2.errors %}
+                                    <ol>
+                                    {% for error in form.password2.errors %}
+                                        <li><strong>{{ error|escape }}</strong></li>
+                                    {% endfor %}
+                                    </ol>
+                                {% endif %}
+                        </div>
+                        
+
+                        <div class="">
+                            <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-dot-circle-o"></i> Submit</button>
+                            <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+                        </div>
+                    </form>
+                            {{ form.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <!-- Bootstrap and necessary plugins -->
+  <script src="{% static 'core/vendors/js/jquery.min.js'%}"></script>
+  <script src="{% static 'core/vendors/js/popper.min.js'%}"></script>
+  <script src="{% static 'core/vendors/js/bootstrap.min.js'%}"></script>
+  <script src="{% static 'core/vendors/js/pace.min.js'%}"></script>
+  <script src="{% static 'core/vendors/js/Chart.min.js'%}"></script>
+
+<!-- CoreUI main scripts -->
+
+  <script src="{% static 'core/js/app.js'%}"></script>
+
+<!-- Plugins and scripts required by this views -->
+
+<!-- Custom scripts required by this view -->
+  <script src="{% static 'core/js/main.js'%}"></script>
+
+{% endblock %}
