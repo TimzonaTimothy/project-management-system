@@ -11,13 +11,14 @@ from .models import Userhistory
 @login_required(login_url='/login')
 def InitializeDeposit(request):
     value = {
-        'email': request.user
+        'email': request.user.email
     }
     if request.method == "POST":
         payment_form = PaymentForm(request.POST)
         if payment_form.is_valid():
             payment=payment_form.save()
-            return render(request, 'confirm.html', {'payment':payment, 'PUBLIC_KEY':settings.PAYSTACK_PUBLIC_KEY})
+            verify_payment_url = payment_form.get_verify_payment_url()
+            return render(request, 'confirm.html', {'payment':payment,'verify_payment_url': verify_payment_url,'PUBLIC_KEY':settings.PAYSTACK_PUBLIC_KEY})
     else:
         payment_form =  PaymentForm(initial=value)
     args = {'forms':payment_form}
